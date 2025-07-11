@@ -71,9 +71,9 @@
         setLoadingMakes(true);
         setApiError('');
         try {
-          var response = await fetch(`/.netlify/functions/proxy?url=${encodeURIComponent(`https://vpic.nhtsa.dot.gov/api/vehicles/GetMakesForVehicleType/Car?year=${year}&format=json`)}`);
+          var response = await fetch(`/.netlify/functions/proxy?url=${encodeURIComponent(`https://vpic.nhtsa.dot.gov/api/vehicles/GetMakesForVehicleType/Passenger Car?year=${year}&format=json`)}`);
           var data = await response.json();
-          if (data.Results) {
+          if (data.Results && data.Results.length > 0) {
             setMakes(data.Results.map(function (item) { return item.Make_Name; }).sort());
             setFormData(function (prev) {
               var updatedVehicles = [...prev.vehicles];
@@ -95,9 +95,9 @@
         setLoadingModels(true);
         setApiError('');
         try {
-          var response = await fetch(`/.netlify/functions/proxy?url=${encodeURIComponent(`https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMakeYear/make/${make}/modelyear/${year}/vehicleType/Car?format=json`)}`);
+          var response = await fetch(`/.netlify/functions/proxy?url=${encodeURIComponent(`https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMakeYear/make/${make}/modelyear/${year}/vehicleType/Passenger Car?format=json`)}`);
           var data = await response.json();
-          if (data.Results) {
+          if (data.Results && data.Results.length > 0) {
             setModels(data.Results.map(function (item) { return item.Model_Name; }).sort());
             setFormData(function (prev) {
               var updatedVehicles = [...prev.vehicles];
@@ -245,7 +245,7 @@
           ),
 
           step === 2 && React.createElement('div', { className: 'space-y-4' },
-            React.createElement('h3', { className: 'text-lg font-medium text-gray-900' }, 'Vehicle Information (Passenger Cars Only'),
+            React.createElement('h3', { className: 'text-lg font-medium text-gray-900' }, 'Vehicle Information (Passenger Cars Only)'),
             apiError && React.createElement('div', { className: 'text-red-600 text-sm' }, apiError),
             formData.vehicles.map(function (vehicle, index) {
               return React.createElement('div', { key: index, className: 'space-y-4 border-t pt-4' },
