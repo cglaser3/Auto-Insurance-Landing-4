@@ -3,29 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Test React Form</title>
+  <title>Insurance Quote Multi-Step Form</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚗</text></svg>">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Pre-generated Tailwind CSS to avoid CDN warning -->
+  <style>
+    /* Minified Tailwind CSS for the form */
+    :root{--tw-ring-inset:0;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:#3b82f666;--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur:0;--tw-brightness:0;--tw-contrast:0;--tw-grayscale:0;--tw-hue-rotate:0;--tw-invert:0;--tw-saturate:0;--tw-sepia:0;--tw-drop-shadow:0;--tw-backdrop-blur:0;--tw-backdrop-brightness:0;--tw-backdrop-contrast:0;--tw-backdrop-grayscale:0;--tw-backdrop-hue-rotate:0;--tw-backdrop-invert:0;--tw-backdrop-opacity:0;--tw-backdrop-saturate:0;--tw-backdrop-sepia:0;--tw-contain-size:0;--tw-contain-layout:0;--tw-contain-paint:0;--tw-contain-style:0}*,:before,:after{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}html{font-family:ui-sans-serif,system-ui,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";line-height:1.5}body{margin:0}input,select{font-family:inherit;font-size:100%;font-weight:inherit;padding:0}input::placeholder{color:#6b7280;opacity:1}[type=checkbox]{border-radius:0;border-width:1px;color:#4b5563}button{cursor:pointer;font-family:inherit}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}.appearance-none{-webkit-appearance:none;-moz-appearance:none;appearance:none}.relative{position:relative}.mt-1{margin-top:.25rem}.mt-2{margin-top:.5rem}.mt-6{margin-top:1.5rem}.block{display:block}.inline-flex{display:inline-flex}.flex{display:flex}.min-h-screen{min-height:100vh}.w-full{width:100%}.max-w-lg{max-width:32rem}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.space-y-2>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.5rem * var(--tw-space-y-reverse))}.space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-8>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(2rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(2rem * var(--tw-space-y-reverse))}.rounded{border-radius:.25rem}.rounded-md{border-radius:.375rem}.border{border-width:1px}.border-t{border-top-width:1px}.border-gray-300{border-color:#d1d5db}.bg-gray-100{--tw-bg-opacity:1;background-color:#f3f4f6}.bg-white{--tw-bg-opacity:1;background-color:#fff}.p-8{padding:2rem}.px-3{padding-left:.75rem;padding-right:.75rem}.px-4{padding-left:1rem;padding-right:1rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.py-12{padding-top:3rem;padding-bottom:3rem}.pt-4{padding-top:1rem}.ml-2{margin-left:.5rem}.ml-auto{margin-left:auto}.text-center{text-align:center}.text-sm{font-size:.875rem;line-height:1.25rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.font-medium{font-weight:500}.font-extrabold{font-weight:800}.text-gray-600{--tw-text-opacity:1;color:#4b5563}.text-gray-700{--tw-text-opacity:1;color:#374151}.text-gray-900{--tw-text-opacity:1;color:#111827}.text-red-600{--tw-text-opacity:1;color:#dc2626}.text-red-800{--tw-text-opacity:1;color:#991b1b}.text-indigo-600{--tw-text-opacity:1;color:#4f46e5}.text-indigo-800{--tw-text-opacity:1;color:#3730a3}.text-white{--tw-text-opacity:1;color:#fff}.placeholder-gray-500::placeholder{--tw-placeholder-opacity:1;color:#6b7280}.hover\:bg-gray-50:hover{--tw-bg-opacity:1;background-color:#f9fafb}.hover\:bg-indigo-700:hover{--tw-bg-opacity:1;background-color:#4338ca}.hover\:text-red-800:hover{--tw-text-opacity:1;color:#991b1b}.hover\:text-indigo-800:hover{--tw-text-opacity:1;color:#3730a3}.focus\:outline-none:focus{outline:2px solid #0000;outline-offset:2px}.focus\:ring-2:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 #0000)}.focus\:ring-offset-2:focus{--tw-ring-offset-width:2px}.focus\:ring-indigo-500:focus{--tw-ring-color:#6366f1}.focus\:border-indigo-500:focus{--tw-border-opacity:1;border-color:#6366f1}@media (min-width:640px){.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:text-sm{font-size:.875rem;line-height:1.25rem}} @media (min-width:1024px){.lg\:px-8{padding-left:2rem;padding-right:2rem}}
+  </style>
   <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/babel-standalone@7.22.9/babel.min.js"></script>
 </head>
 <body>
   <div id="root"></div>
-  <script type="text/babel">
-    function TestForm() {
-      return (
-        <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-          <div className="bg-white p-8 rounded-lg shadow-lg">
-            <h1 className="text-3xl font-bold text-gray-900">Hello Form!</h1>
-            <p className="text-gray-700">If you see this, React is working. Click below to test.</p>
-            <button className="mt-4 py-2 px-4 bg-indigo-600 text-white rounded-md">Test Button</button>
-          </div>
-        </div>
-      );
-    }
-
-    ReactDOM.render(<TestForm />, document.getElementById('root'));
-  </script>
-</body>
-</html>
+  <script type="text/javascript">
+    var ErrorBoundary = React.Component.extend({
+      getInitialState: function () {
+        return { hasError: false };
+      },
+      getDerivedStateFromError: function () {
+        return { hasError: true };
+      },
+      render: function () {
+        if (this.state.hasError) {
+          return React
