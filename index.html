@@ -14,27 +14,25 @@
 <body>
   <div id="root"></div>
   <script type="text/javascript">
-    var ErrorBoundary = React.Component.extend({
-      getInitialState: function () {
-        return { hasError: false };
-      },
-      getDerivedStateFromError: function () {
+    class ErrorBoundary extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = { hasError: false };
+      }
+      static getDerivedStateFromError(error) {
         return { hasError: true };
-      },
-      render: function () {
+      }
+      render() {
         if (this.state.hasError) {
           return React.createElement('div', { className: 'text-red-600 text-center' }, 'Something went wrong. Please try again.');
         }
         return this.props.children;
       }
-    });
+    }
 
     function InsuranceForm() {
-      var _useState = React.useState(1),
-          step = _useState[0],
-          setStep = _useState[1];
-
-      var _useState2 = React.useState({
+      var [step, setStep] = React.useState(1);
+      var [formData, setFormData] = React.useState({
         personalInfo: {
           fullName: '',
           dateOfBirth: '',
@@ -59,29 +57,12 @@
           deductible: '500',
           additionalFeatures: { roadside: false, rental: false }
         }
-      }),
-          formData = _useState2[0],
-          setFormData = _useState2[1];
-
-      var _useState3 = React.useState([]),
-          makes = _useState3[0],
-          setMakes = _useState3[1];
-
-      var _useState4 = React.useState([]),
-          models = _useState4[0],
-          setModels = _useState4[1];
-
-      var _useState5 = React.useState(false),
-          loadingMakes = _useState5[0],
-          setLoadingMakes = _useState5[1];
-
-      var _useState6 = React.useState(false),
-          loadingModels = _useState6[0],
-          setLoadingModels = _useState6[1];
-
-      var _useState7 = React.useState(''),
-          apiError = _useState7[0],
-          setApiError = _useState7[1];
+      });
+      var [makes, setMakes] = React.useState([]);
+      var [models, setModels] = React.useState([]);
+      var [loadingMakes, setLoadingMakes] = React.useState(false);
+      var [loadingModels, setLoadingModels] = React.useState(false);
+      var [apiError, setApiError] = React.useState('');
 
       var years = Array.from({ length: 2025 - 1981 + 1 }, function (_, i) { return 1981 + i; });
 
@@ -264,7 +245,7 @@
           ),
 
           step === 2 && React.createElement('div', { className: 'space-y-4' },
-            React.createElement('h3', { className: 'text-lg font-medium text-gray-900' }, 'Vehicle Information (Passenger Cars Only)'),
+            React.createElement('h3', { className: 'text-lg font-medium text-gray-900' }, 'Vehicle Information (Passenger Cars Only'),
             apiError && React.createElement('div', { className: 'text-red-600 text-sm' }, apiError),
             formData.vehicles.map(function (vehicle, index) {
               return React.createElement('div', { key: index, className: 'space-y-4 border-t pt-4' },
@@ -273,27 +254,21 @@
                   React.createElement('label', { htmlFor: 'year-' + index, className: 'sr-only' }, 'Year'),
                   React.createElement('select', { id: 'year-' + index, name: 'year', required: true, className: 'appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm', value: vehicle.year, onChange: function (e) { handleChange(e, 'vehicles', 'year', index); fetchMakes(e.target.value, index); } },
                     React.createElement('option', { value: '' }, 'Select Year'),
-                    years.map(function (year) {
-                      return React.createElement('option', { key: year, value: year }, year);
-                    })
+                    years.map(function (year) { return React.createElement('option', { key: year, value: year }, year); })
                   )
                 ),
                 React.createElement('div', null,
                   React.createElement('label', { htmlFor: 'make-' + index, className: 'sr-only' }, 'Make'),
                   React.createElement('select', { id: 'make-' + index, name: 'make', required: true, disabled: loadingMakes || !vehicle.year, className: 'appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm disabled:bg-gray-100', value: vehicle.make, onChange: function (e) { handleChange(e, 'vehicles', 'make', index); fetchModels(vehicle.year, e.target.value, index); } },
                     React.createElement('option', { value: '' }, loadingMakes ? 'Loading Makes...' : 'Select Make'),
-                    makes.map(function (make) {
-                      return React.createElement('option', { key: make, value: make }, make);
-                    })
+                    makes.map(function (make) { return React.createElement('option', { key: make, value: make }, make); })
                   )
                 ),
                 React.createElement('div', null,
                   React.createElement('label', { htmlFor: 'model-' + index, className: 'sr-only' }, 'Model'),
                   React.createElement('select', { id: 'model-' + index, name: 'model', required: true, disabled: loadingModels || !vehicle.make, className: 'appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm disabled:bg-gray-100', value: vehicle.model, onChange: function (e) { return handleChange(e, 'vehicles', 'model', index); } },
                     React.createElement('option', { value: '' }, loadingModels ? 'Loading Models...' : 'Select Model'),
-                    models.map(function (model) {
-                      return React.createElement('option', { key: model, value: model }, model);
-                    })
+                    models.map(function (model) { return React.createElement('option', { key: model, value: model }, model); })
                   )
                 ),
                 React.createElement('div', null,
