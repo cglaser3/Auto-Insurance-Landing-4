@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insurance Quote Multi-Step Form</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚗</text></svg>">
+  <link rel="stylesheet" href="dist/output.css">
+  <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/babel-standalone@7.22.9/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    class ErrorBoundary extends React.Component {
+      state = { hasError: false };
+      static getDerivedStateFromError() {
+        return { hasError: true };
+      }
+      render() {
+        if (this.state.hasError) {
+          return <div className="text-red-600 text-center">Something went wrong. Please try again.</div>;
+        }
+        return this.props.children;
+      }
+    }
+
+    function InsuranceForm() {
+      const [step, setStep] = React.useState(1);
+      const [formData, setFormData] = React.useState({
+        personalInfo: {
+          fullName: '',
+          dateOfBirth: '',
+          email: '',
+          phone: '',
+          address: { street: '', city: '', state: '', zip: '' }
+        },
+        vehicles: [{ year: '', make: '', model: '', vin: '', annualMileage: '', isFinancedOrLeased: 'no' }],
+        driverDetails: {
+          licenseNumber: '',
+          stateOfIssue: '',
+          yearsLicensed: '',
+          accidentsOrViolations: 'no'
+        },
+        currentInsurance: {
+          isInsured: 'no',
+          insurerName: '',
+          policyExpiration: ''
+        },
+        coveragePreferences: {
+          coverageType: 'liability',
+          deductible: '500',
+          additionalFeatures: { roadside: false, rental: false }
+        }
+      });
+      const [makes, setMakes] = React.useState([]);
+      const [models, setModels] = React.useState([]);
+      const [loadingMakes, setLoadingMakes] = React.useState(false);
+      const [loadingModels, setLoadingModels] = React.useState(false);
+      const [apiError, setApiError] = React.useState('');
+
+      const years = Array.from({ length: 2025 - 1981 + 1 }, (_, i) => 1981 + i);
+
+      const fetchMakes = async (year, index) => {
+        if (!year) return;
+        setLoadingMakes(true);
+        setApiError('');
+        try {
+          const response = await fetch(`/.netlify/functions/proxy?url=${encodeURIComponent(`https://vpic.nhtsa.dot.gov/api/vehicles/GetMakesForVehicleType/Car?year=${year}&format=json`)}`);
+          const data = await response.json();
+          if (data.Results) {
+            setMakes(data.Results.map((item) => item.Make_Name).sort());
+            setFormData((prev) => {
+              const updatedVehicles = [...prev.vehicles];
+              updatedVehicles[index] = { ...updatedVehicles[index], make: '', model: '' };
+              return { ...prev, vehicles: updatedVehicles };
+            });
+            setModels([]);
+          } else {
+            setApiError('No makes found for the selected year.');
+          }
+        } catch (error) {
+          setApiError('Failed to fetch vehicle makes. Please select another year or enter manually.');
+        }
+        setLoadingMakes(false);
+      };
+
+      const fetchModels = async (year, make, index) => {
+        if (!year || !make) return;
+        setLoadingModels(true);
+        setApiError('');
+        try {
+          const response = await fetch(`/.netlify/functions/proxy?url=${encodeURIComponent(`https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMakeYear/make/${make}/modelyear/${year}/vehicleType/Car?format=json`)}`);
+          const data = await response.json();
+          if (data.Results) {
+            setModels(data.Results.map((item) => item.Model_Name).sort());
+            setFormData((prev) => {
+              const updatedVehicles = [...prev.vehicles];
+              updatedVehicles[index] = { ...updatedVehicles[index], model: '' };
+              return { ...prev, vehicles: updatedVehicles };
+            });
+          } else {
+            setApiError('No models found for the selected make and year.');
+          }
+        } catch (error) {
+          setApiError('Failed to fetch vehicle models. Please select another make or enter manually.');
+        }
+        setLoadingModels(false);
+      };
+
+      const handleChange = (e, section, field, index = null) => {
+        const { name, value, type, checked } = e.target;
+        setFormData((prev) => {
+          if (section === 'vehicles') {
+            const updatedVehicles = [...prev.vehicles];
+            updatedVehicles[index] = { ...updatedVehicles[index], [field]: value };
+            return { ...prev, vehicles: updatedVehicles };
+          } else if (section === 'personalInfo' && field === 'address') {
+            return {
+              ...prev,
+              personalInfo: { ...prev.personalInfo, address: { ...prev.personalInfo.address, [name]: value } }
+            };
+          } else if (section === 'coveragePreferences' && field === 'additionalFeatures') {
+            return {
+              ...prev,
+              coveragePreferences: {
+                ...prev.coveragePreferences,
+                additionalFeatures: { ...prev.coveragePreferences.additionalFeatures, [name]: checked }
+              }
+            };
+          } else {
+            return { ...prev, [section]: { ...prev[section], [field]: value } };
+          }
+        });
+      };
+
+      const addVehicle = () => {
+        setFormData((prev) => ({
+          ...prev,
+          vehicles: [...prev.vehicles, { year: '', make: '', model: '', vin: '', annualMileage: '', isFinancedOrLeased: 'no' }]
+        }));
+        setMakes([]);
+        setModels([]);
+      };
+
+      const removeVehicle = (index) => {
+        setFormData((prev) => ({
+          ...prev,
+          vehicles: prev.vehicles.filter((_, i) => i !== index)
+        });
+      };
+
+      const validateStep = () => {
+        if (step === 1) {
+          const { fullName, dateOfBirth, email, phone, address } = formData.personalInfo;
+          return fullName && dateOfBirth && email && phone && address.street && address.city && address.state && address.zip;
+        }
+        if (step === 2) {
+          return formData.vehicles.every((vehicle) => vehicle.year && vehicle.make && vehicle.model && vehicle.annualMileage);
+        }
+        if (step === 3) {
+          const { yearsLicensed, accidentsOrViolations } = formData.driverDetails;
+          return yearsLicensed && accidentsOrViolations;
+        }
+        if (step === 4) {
+          const { isInsured, insurerName, policyExpiration } = formData.currentInsurance;
+          return isInsured === 'no' || (isInsured === 'yes' && insurerName && policyExpiration);
+        }
+        return true;
+      };
+
+      const nextStep = () => {
+        if (validateStep()) {
+          setStep((prev) => prev + 1);
+          setMakes([]);
+          setModels([]);
+        } else {
+          alert('Please fill out all required fields.');
+        }
+      };
+
+      const prevStep = () => {
+        setStep((prev) => prev - 1);
+        setMakes([]);
+        setModels([]);
+      };
+
+      const handleSubmit = () => {
+        console.log('Form Data Submitted:', JSON.stringify(formData, null, 2));
+        alert('Form submitted! Check console for data.');
+      };
+
+      return (
+        <div className="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-lg w-full space-y-8 bg-white p-8 rounded-lg shadow-lg">
+            <h2 className="text-center text-3xl font-extrabold text-gray-900">Insurance Quote Form</h2>
+            <div className="text-center text-sm text-gray-600">Step {step} of 5</div>
+
+            {step === 1 && (
+              <div className="space-y-4">
+                <h3 className="text-lg font-medium text-gray-900">Personal Information</h3>
+                <div>
+                  <label htmlFor="fullName" className="sr-only">Full Name</label>
+                  <input
+                    id="fullName"
+                    name="fullName"
+                    type="text"
+                    required
+                    className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    placeholder="Full Name"
+                    value={formData.personalInfo.fullName}
+                    onChange={(e) => handleChange(e, 'personalInfo', 'fullName')}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="dateOfBirth" className="sr-only">Date of Birth</label>
+                  <input
+                    id="dateOfBirth"
+                    name="dateOfBirth"
+                    type="date"
+                    required
+                    className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    value={formData.personalInfo.dateOfBirth}
+                    onChange={(e) => handleChange(e, 'personalInfo', 'dateOfBirth')}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="sr-only">Email</label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    placeholder="Email"
+                    value={formData.personalInfo.email}
+                    onChange={(e) => handleChange(e, 'personalInfo', 'email')}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="phone" className="sr-only">Phone Number</label>
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    required
+                    className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    placeholder="Phone Number"
+                    value={formData.personalInfo.phone}
+                    onChange={(e) => handleChange(e, 'personalInfo', 'phone')}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="street" className="sr-only">Street Address</label>
+                  <input
+                    id="street"
+                    name="street"
+                    type="text"
+                    required
+                    className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    placeholder="Street Address"
+                    value={formData.personalInfo.address.street}
+                    onChange={(e) => handleChange(e, 'personalInfo', 'address')}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="city" className="sr-only">City</label>
+                  <input
+                    id="city"
+                    name="city"
+                    type="text"
+                    required
+                    className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    placeholder="City"
+                    value={formData.personalInfo.address.city}
+                    onChange={(e) => handleChange(e, 'personalInfo', 'address')}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="state" className="sr-only">State</label>
+                  <input
+                    id="state"
+                    name="state"
+                    type="text"
+                    required
+                    className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    placeholder="State"
+                    value={formData.personalInfo.address.state}
+                    onChange={(e) => handleChange(e, 'personalInfo', 'address')}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="zip" className="sr-only">ZIP Code</label>
+                  <input
+                    id="zip"
+                    name="zip"
+                    type="text"
+                    required
+                    className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    placeholder="ZIP Code"
+                    value={formData.personalInfo.address.zip}
+                    onChange={(e) => handleChange(e, 'personalInfo', 'address')}
+                  />
+                </div>
+              </div>
+            )}
+            {step === 2 && (
+              <div className="space-y-4">
+                <h3 className="text-lg font-medium text-gray-900">Vehicle Information (Passenger Cars Only)</h3>
+                {apiError && <div className="text-red-600 text-sm">{apiError}</div>}
+                {formData.vehicles.map((vehicle, index) => (
+                  <div key={index} className="space-y-4 border-t pt-4">
+                    <h4 className="text-sm font-medium text-gray-700">Vehicle {index + 1}</h4>
+                    <div>
+                      <label htmlFor={`year-${index}`} className="sr-only">Year</label>
+                      <select
+                        id={`year-${index}`}
+                        name="year"
+                        required
+                        className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        value={vehicle.year}
+                        onChange={(e) => {
+                          handleChange(e, 'vehicles', 'year', index);
+                          fetchMakes(e.target.value, index);
+                        }}
+                      >
+                        <option value="">Select Year</option>
+                        {years.map((year) => (
+                          <option key={year} value={year}>{year}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <label htmlFor={`make-${index}`} className="sr-only">Make</label>
+                      <select
+                        id={`make-${index}`}
+                        name="make"
+                        required
+                        disabled={loadingMakes || !vehicle.year}
+                        className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm disabled:bg-gray-100"
+                        value={vehicle.make}
+                        onChange={(e) => {
+                          handleChange(e, 'vehicles', 'make', index);
+                          fetchModels(vehicle.year, e.target.value, index);
+                        }}
+                      >
+                        <option value="">{loadingMakes ? 'Loading Makes...' : 'Select Make'}</option>
+                        {makes.map((make) => (
+                          <option key={make} value={make}>{make}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <label htmlFor={`model-${index}`} className="sr-only">Model</label>
+                      <select
+                        id={`model-${index}`}
+                        name="model"
+                        required
+                        disabled={loadingModels || !vehicle.make}
+                        className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm disabled:bg-gray-100"
+                        value={vehicle.model}
+                        onChange={(e) => handleChange(e, 'vehicles', 'model', index)}
+                      >
+                        <option value="">{loadingModels ? 'Loading Models...' : 'Select Model'}</option>
+                        {models.map((model) => (
+                          <option key={model} value={model}>{model}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <label htmlFor={`vin-${index}`} className="sr-only">VIN (Optional)</label>
+                      <input
+                        id={`vin-${index}`}
+                        name="vin"
+                        type="text"
+                        className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        placeholder="VIN (Optional)"
+                        value={vehicle.vin}
+                        onChange={(e) => handleChange(e, 'vehicles', 'vin', index)}
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor={`annualMileage-${index}`} className="sr-only">Estimated Annual Mileage</label>
+                      <input
+                        id={`annualMileage-${index}`}
+                        name="annualMileage"
+                        type="number"
+                        required
+                        className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        placeholder="Estimated Annual Mileage"
+                        value={vehicle.annualMileage}
+                        onChange={(e) => handleChange(e, 'vehicles', 'annualMileage', index)}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">Is the car financed or leased?</label>
+                      <select
+                        name="isFinancedOrLeased"
+                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        value={vehicle.isFinancedOrLeased}
+                        onChange={(e) => handleChange(e, 'vehicles', 'isFinancedOrLeased', index)}
+                      >
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                      </select>
+                    </div>
+                    {formData.vehicles.length > 1 && (
+                      <button
+                        type="button"
+                        className="text-sm text-red-600 hover:text-red-800"
+                        onClick={() => removeVehicle(index)}
+                      >
+                        Remove Vehicle
+                      </button>
+                    )}
+                  </div>
+                ))}
+                <button
+                  type="button"
+                  className="text-sm text-indigo-600 hover:text-indigo-800"
+                  onClick={addVehicle}
+                >
+                  Add Another Vehicle
+                </button>
+              </div>
+            )}
+            {step === 3 && (
+              <div className="space-y-4">
+                <h3 className="text-lg font-medium text-gray-900">Driver Details</h3>
+                <div>
+                  <label htmlFor="licenseNumber" className="sr-only">License Number (Optional)</label>
+                  <input
+                    id="licenseNumber"
+                    name="licenseNumber"
+                    type="text"
+                    className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    placeholder="License Number (Optional)"
+                    value={formData.driverDetails.licenseNumber}
+                    onChange={(e) => handleChange(e, 'driverDetails', 'licenseNumber')}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="stateOfIssue" className="sr-only">State of Issue</label>
+                  <input
+                    id="stateOfIssue"
+                    name="stateOfIssue"
+                    type="text"
+                    className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    placeholder="State of Issue"
+                    value={formData.driverDetails.stateOfIssue}
+                    onChange={(e) => handleChange(e, 'driverDetails', 'stateOfIssue')}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="yearsLicensed" className="sr-only">Years Licensed</label>
+                  <input
+                    id="yearsLicensed"
+                    name="yearsLicensed"
+                    type="number"
+                    required
+                    className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    placeholder="Years Licensed"
+                    value={formData.driverDetails.yearsLicensed}
+                    onChange={(e) => handleChange(e, 'driverDetails', 'yearsLicensed')}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Any accidents or violations in the past 5 years?</label>
+                  <select
+                    name="accidentsOrViolations"
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    value={formData.driverDetails.accidentsOrViolations}
+                    onChange={(e) => handleChange(e, 'driverDetails', 'accidentsOrViolations')}
+                  >
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                  </select>
+                </div>
+              </div>
+            )}
+            {step === 4 && (
+              <div className="space-y-4">
+                <h3 className="text-lg font-medium text-gray-900">Current Insurance Info</h3>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Are you currently insured?</label>
+                  <select
+                    name="isInsured"
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    value={formData.currentInsurance.isInsured}
+                    onChange={(e) => handleChange(e, 'currentInsurance', 'isInsured')}
+                  >
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                  </select>
+                </div>
+                {formData.currentInsurance.isInsured === 'yes' && (
+                  <>
+                    <div>
+                      <label htmlFor="insurerName" className="sr-only">Current Insurer Name</label>
+                      <input
+                        id="insurerName"
+                        name="insurerName"
+                        type="text"
+                        required
+                        className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        placeholder="Current Insurer Name"
+                        value={formData.currentInsurance.insurerName}
+                        onChange={(e) => handleChange(e, 'currentInsurance', 'insurerName')}
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="policyExpiration" className="sr-only">Policy Expiration Date</label>
+                      <input
+                        id="policyExpiration"
+                        name="policyExpiration"
+                        type="date"
+                        required
+                        className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        value={formData.currentInsurance.policyExpiration}
+                        onChange={(e) => handleChange(e, 'currentInsurance', 'policyExpiration')}
+                      />
+                    </div>
+                  </>
+                )}
+              </div>
+            )}
+            {step === 5 && (
+              <div className="space-y-4">
+                <h3 className="text-lg font-medium text-gray-900">Coverage Preferences</h3>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Type of Coverage</label>
+                  <select
+                    name="coverageType"
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    value={formData.coveragePreferences.coverageType}
+                    onChange={(e) => handleChange(e, 'coveragePreferences', 'coverageType')}
+                  >
+                    <option value="liability">Liability Only</option>
+                    <option value="full">Full Coverage</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Deductible Preference</label>
+                  <select
+                    name="deductible"
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    value={formData.coveragePreferences.deductible}
+                    onChange={(e) => handleChange(e, 'coveragePreferences', 'deductible')}
+                  >
+                    <option value="500">$500</option>
+                    <option value="1000">$1,000</option>
+                    <option value="1500">$1,500</option>
+                    <option value="2000">$2,000</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Additional Features</label>
+                  <div className="mt-2 space-y-2">
+                    <div>
+                      <label className="inline-flex items-center">
+                        <input
+                          type="checkbox"
+                          name="roadside"
+                          checked={formData.coveragePreferences.additionalFeatures.roadside}
+                          onChange={(e) => handleChange(e, 'coveragePreferences', 'additionalFeatures')}
+                          className="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                        />
+                        <span className="ml-2 text-sm text-gray-600">Roadside Assistance</span>
+                      </label>
+                    </div>
+                    <div>
+                      <label className="inline-flex items-center">
+                        <input
+                          type="checkbox"
+                          name="rental"
+                          checked={formData.coveragePreferences.additionalFeatures.rental}
+                          onChange={(e) => handleChange(e, 'coveragePreferences', 'additionalFeatures')}
+                          className="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                        />
+                        <span className="ml-2 text-sm text-gray-600">Rental Car Coverage</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+            <div className="flex justify-between mt-6">
+              {step > 1 && (
+                <button
+                  type="button"
+                  className="py-2 px-4 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  onClick={prevStep}
+                >
+                  Back
+                </button>
+              )}
+              {step < 5 && (
+                <button
+                  type="button"
+                  className="ml-auto py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  onClick={nextStep}
+                >
+                  Next
+                </button>
+              )}
+              {step === 5 && (
+                <button
+                  type="button"
+                  className="ml-auto py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  onClick={handleSubmit}
+                >
+                  Submit
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    ReactDOM.render(
+      <ErrorBoundary>
+        <InsuranceForm />
+      </ErrorBoundary>,
+      document.getElementById('root')
+    );
+  </script>
+</body>
+</html>
