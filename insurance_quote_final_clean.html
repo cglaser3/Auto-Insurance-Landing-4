@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auto Insurance Quote</title>
+  <script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f3f4f6;
+      margin: 0;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: 600;
+    }
+    input, select {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.25rem;
+      border: 1px solid #ccc;
+      border-radius: 0.25rem;
+    }
+    .buttons {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+    }
+    button {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      background-color: #3b82f6;
+      color: white;
+      border-radius: 0.25rem;
+      cursor: pointer;
+    }
+    button:disabled {
+      background-color: #9ca3af;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/javascript">
+    const { useState, useEffect } = React;
+
+    function App() {
+      const [step, setStep] = useState(1);
+      const [year, setYear] = useState('');
+      const [make, setMake] = useState('');
+      const [model, setModel] = useState('');
+      const [makes, setMakes] = useState([]);
+      const [models, setModels] = useState([]);
+      const [error, setError] = useState('');
+
+      const years = Array.from({ length: 2025 - 1981 + 1 }, (_, i) => 2025 - i);
+
+      useEffect(() => {
+        if (year) {
+          fetchMakes();
+        }
+      }, [year]);
+
+      const fetchMakes = async () => {
+        try {
+          const res = await fetch('https://vpic.nhtsa.dot.gov/api/vehicles/GetMakesForVehicleType/car?format=json');
+          const data = await res.json();
+          setMakes(data.Results.map(m => m.MakeName || m.Make_Name).sort());
+        } catch {
+          setError('Failed to load makes');
+        }
+      };
+
+      const fetchModels = async (make) => {
+        if (!make || !year) return;
+        try {
+          const res = await fetch(`https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMakeYear/make/${make}/modelyear/${year}/vehicleType/car?format=json`);
+          const data = await res.json();
+          setModels(data.Results.map(m => m.Model_Name).sort());
+        } catch {
+          setError('Failed to load models');
+        }
+      };
+
+      const next = () => setStep(step + 1);
+      const back = () => setStep(step - 1);
+
+      return (
+        React.createElement('div', { className: 'container' },
+          React.createElement('h1', null, 'Auto Insurance Quote'),
+          step === 1 && (
+            React.createElement('div', null,
+              React.createElement('h2', null, 'Step 1: Contact Info'),
+              React.createElement('label', null, 'First Name', React.createElement('input', { required: true })),
+              React.createElement('label', null, 'Last Name', React.createElement('input', { required: true })),
+              React.createElement('label', null, 'Email', React.createElement('input', { type: 'email', required: true })),
+              React.createElement('label', null, 'Phone', React.createElement('input', { type: 'tel', required: true })),
+              React.createElement('label', null, 'Address', React.createElement('input', { required: true })),
+              React.createElement('div', { className: 'buttons' },
+                React.createElement('button', { onClick: next }, 'Next')
+              )
+            )
+          ),
+          step === 2 && (
+            React.createElement('div', null,
+              React.createElement('h2', null, 'Step 2: Vehicle Info'),
+              React.createElement('label', null, 'Year',
+                React.createElement('select', {
+                  value: year,
+                  onChange: e => {
+                    setYear(e.target.value);
+                    setMake('');
+                    setModel('');
+                    setModels([]);
+                  }
+                },
+                  React.createElement('option', { value: '' }, '-- Select Year --'),
+                  years.map(y => React.createElement('option', { key: y, value: y }, y))
+                )
+              ),
+              React.createElement('label', null, 'Make',
+                React.createElement('select', {
+                  value: make,
+                  onChange: e => {
+                    setMake(e.target.value);
+                    setModel('');
+                    fetchModels(e.target.value);
+                  }
+                },
+                  React.createElement('option', { value: '' }, '-- Select Make --'),
+                  makes.map(m => React.createElement('option', { key: m, value: m }, m))
+                )
+              ),
+              React.createElement('label', null, 'Model',
+                React.createElement('select', {
+                  value: model,
+                  onChange: e => setModel(e.target.value)
+                },
+                  React.createElement('option', { value: '' }, '-- Select Model --'),
+                  models.map(m => React.createElement('option', { key: m, value: m }, m))
+                )
+              ),
+              error && React.createElement('p', { style: { color: 'red' } }, error),
+              React.createElement('div', { className: 'buttons' },
+                React.createElement('button', { onClick: back }, 'Back'),
+                React.createElement('button', { onClick: next }, 'Next')
+              )
+            )
+          ),
+          step === 3 && (
+            React.createElement('div', null,
+              React.createElement('h2', null, 'Step 3: Thank You'),
+              React.createElement('p', null, 'Thank you! Your quote will be emailed shortly.'),
+              React.createElement('div', { className: 'buttons' },
+                React.createElement('button', { onClick: back }, 'Back')
+              )
+            )
+          )
+        )
+      );
+    }
+
+    ReactDOM.render(React.createElement(App), document.getElementById('root'));
+  </script>
+</body>
+</html>
