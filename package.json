@@ -1,0 +1,12 @@
+{
+  "name": "insurance-quote-form",
+  "version": "1.0.0",
+  "description": "Multi-step insurance quote form",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify"
+  },
+  "devDependencies": {
+    "axios": "^1.7.7",
+    "tailwindcss": "^3.4.10"
+  }
+}
