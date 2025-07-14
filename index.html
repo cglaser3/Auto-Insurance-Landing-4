@@ -3,389 +3,286 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Insurance Quote Multi-Step Form</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚗</text></svg>">
-  <style>
-    :root{--tw-ring-inset:0;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:#3b82f666;--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur:0;--tw-brightness:0;--tw-contrast:0;--tw-grayscale:0;--tw-hue-rotate:0;--tw-invert:0;--tw-saturate:0;--tw-sepia:0;--tw-drop-shadow:0;--tw-backdrop-blur:0;--tw-backdrop-brightness:0;--tw-backdrop-contrast:0;--tw-backdrop-grayscale:0;--tw-backdrop-hue-rotate:0;--tw-backdrop-invert:0;--tw-backdrop-opacity:0;--tw-backdrop-saturate:0;--tw-backdrop-sepia:0;--tw-contain-size:0;--tw-contain-layout:0;--tw-contain-paint:0;--tw-contain-style:0}*,:before,:after{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}html{font-family:ui-sans-serif,system-ui,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";line-height:1.5}body{margin:0}input,select{font-family:inherit;font-size:100%;font-weight:inherit;padding:0}input::placeholder{color:#6b7280;opacity:1}[type=checkbox]{border-radius:0;border-width:1px;color:#4b5563}button{cursor:pointer;font-family:inherit}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}.appearance-none{-webkit-appearance:none;-moz-appearance:none;appearance:none}.relative{position:relative}.mt-1{margin-top:.25rem}.mt-2{margin-top:.5rem}.mt-6{margin-top:1.5rem}.block{display:block}.inline-flex{display:inline-flex}.flex{display:flex}.min-h-screen{min-height:100vh}.w-full{width:100%}.max-w-lg{max-width:32rem}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.space-y-2>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.5rem * var(--tw-space-y-reverse))}.space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-8>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(2rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(2rem * var(--tw-space-y-reverse))}.rounded{border-radius:.25rem}.rounded-md{border-radius:.375rem}.border{border-width:1px}.border-t{border-top-width:1px}.border-gray-300{border-color:#d1d5db}.bg-gray-100{--tw-bg-opacity:1;background-color:#f3f4f6}.bg-white{--tw-bg-opacity:1;background-color:#fff}.p-8{padding:2rem}.px-3{padding-left:.75rem;padding-right:.75rem}.px-4{padding-left:1rem;padding-right:1rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.py-12{padding-top:3rem;padding-bottom:3rem}.pt-4{padding-top:1rem}.ml-2{margin-left:.5rem}.ml-auto{margin-left:auto}.text-center{text-align:center}.text-sm{font-size:.875rem;line-height:1.25rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.font-medium{font-weight:500}.font-extrabold{font-weight:800}.text-gray-600{--tw-text-opacity:1;color:#4b5563}.text-gray-700{--tw-text-opacity:1;color:#374151}.text-gray-900{--tw-text-opacity:1;color:#111827}.text-red-600{--tw-text-opacity:1;color:#dc2626}.text-red-800{--tw-text-opacity:1;color:#991b1b}.text-indigo-600{--tw-text-opacity:1;color:#4f46e5}.text-indigo-800{--tw-text-opacity:1;color:#3730a3}.text-white{--tw-text-opacity:1;color:#fff}.placeholder-gray-500::placeholder{--tw-placeholder-opacity:1;color:#6b7280}.hover\:bg-gray-50:hover{--tw-bg-opacity:1;background-color:#f9fafb}.hover\:bg-indigo-700:hover{--tw-bg-opacity:1;background-color:#4338ca}.hover\:text-red-800:hover{--tw-text-opacity:1;color:#991b1b}.hover\:text-indigo-800:hover{--tw-text-opacity:1;color:#3730a3}.focus\:outline-none:focus{outline:2px solid #0000;outline-offset:2px}.focus\:ring-2:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 #0000)}.focus\:ring-offset-2:focus{--tw-ring-offset-width:2px}.focus\:ring-indigo-500:focus{--tw-ring-color:#6366f1}.focus\:border-indigo-500:focus{--tw-border-opacity:1;border-color:#6366f1}@media (min-width:640px){.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:text-sm{font-size:.875rem;line-height:1.25rem}} @media (min-width:1024px){.lg\:px-8{padding-left:2rem;padding-right:2rem}}
-  </style>
-  <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+  <title>Auto Insurance Quote</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <div id="root"></div>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+  <div id="root" class="w-full max-w-2xl p-4"></div>
+
   <script type="text/javascript">
-    class ErrorBoundary extends React.Component {
-      constructor(props) {
-        super(props);
-        this.state = { hasError: false };
-      }
-      static getDerivedStateFromError(error) {
-        return { hasError: true };
-      }
-      render() {
-        if (this.state.hasError) {
-          return React.createElement('div', { className: 'text-red-600 text-center' }, 'Something went wrong. Please try again.');
-        }
-        return this.props.children;
-      }
-    }
+    const { useState } = React;
+
+    const years = Array.from({ length: 2025 - 1981 + 1 }, (_, i) => 2025 - i);
+
+    const initialDriver = { fullName: '', dob: '', license: '' };
+    const initialVehicle = { year: '', make: '', model: '', vin: '' };
+    const initialCoverage = { type: 'Liability', deductible: '500' };
 
     function InsuranceForm() {
-      var [step, setStep] = React.useState(1);
-      var [formData, setFormData] = React.useState({
-        personalInfo: {
-          fullName: '',
-          dateOfBirth: '',
-          email: '',
-          phone: '',
+      const [step, setStep] = useState(1);
+      const [formData, setFormData] = useState({
+        contact: {
+          firstName: '', lastName: '', email: '', phone: '',
           address: { street: '', city: '', state: '', zip: '' }
         },
-        vehicles: [{ year: '', make: '', model: '', vin: '', annualMileage: '', isFinancedOrLeased: 'no' }],
-        driverDetails: {
-          licenseNumber: '',
-          stateOfIssue: '',
-          yearsLicensed: '',
-          accidentsOrViolations: 'no'
-        },
-        currentInsurance: {
-          isInsured: 'no',
-          insurerName: '',
-          policyExpiration: ''
-        },
-        coveragePreferences: {
-          coverageType: 'liability',
-          deductible: '500',
-          additionalFeatures: { roadside: false, rental: false }
+        drivers: [ { ...initialDriver } ],
+        vehicles: [ { ...initialVehicle } ],
+        insurance: {
+          insurer: '', timeInsured: '', coverageLimits: '25,000/50,000',
+          vehicleCoverage: [ { ...initialCoverage } ],
+          premium: ''
         }
       });
-      var [makes, setMakes] = React.useState([]);
-      var [models, setModels] = React.useState([]);
-      var [loadingMakes, setLoadingMakes] = React.useState(false);
-      var [loadingModels, setLoadingModels] = React.useState(false);
-      var [apiError, setApiError] = React.useState('');
+      const [makes, setMakes] = useState([]);
+      const [models, setModels] = useState([]);
+      const [loading, setLoading] = useState(false);
 
-      var years = Array.from({ length: 2025 - 1981 + 1 }, function (_, i) { return 1981 + i; });
+      const updateField = (section, index, field, value) => {
+        setFormData(prev => {
+          const data = { ...prev };
+          if (section === 'contact') {
+            if (field in data.contact.address) {
+              data.contact.address[field] = value;
+            } else {
+              data.contact[field] = value;
+            }
+          } else if (section === 'drivers') {
+            data.drivers[index][field] = value;
+          } else if (section === 'vehicles') {
+            data.vehicles[index][field] = value;
+          } else if (section === 'insurance') {
+            if (field === 'vehicleCoverage') {
+              data.insurance.vehicleCoverage[index] = {
+                ...data.insurance.vehicleCoverage[index], ...value
+              };
+            } else {
+              data.insurance[field] = value;
+            }
+          }
+          return data;
+        });
+      };
 
-      var fetchMakes = async function (year, index) {
-        if (!year) return;
-        setLoadingMakes(true);
-        setApiError('');
+      const setDriverCount = count => {
+        setFormData(prev => ({
+          ...prev,
+          drivers: Array.from({ length: count }, (_, i) => prev.drivers[i] || { ...initialDriver })
+        }));
+      };
+
+      const setVehicleCount = count => {
+        setFormData(prev => ({
+          ...prev,
+          vehicles: Array.from({ length: count }, (_, i) => prev.vehicles[i] || { ...initialVehicle }),
+          insurance: {
+            ...prev.insurance,
+            vehicleCoverage: Array.from({ length: count }, (_, i) => prev.insurance.vehicleCoverage[i] || { ...initialCoverage })
+          }
+        }));
+      };
+
+      const fetchMakes = async () => {
+        setLoading(true);
         try {
-          var response = await fetch(`/.netlify/functions/proxy?url=${encodeURIComponent(`https://vpic.nhtsa.dot.gov/api/vehicles/GetMakesForVehicleType/passenger%20car?format=json`)}`);
-          var data = await response.json();
-          if (data.Results && data.Results.length > 0) {
-            setMakes(data.Results.map(function (item) { return item.Make_Name; }).sort());
-            setFormData(function (prev) {
-              var updatedVehicles = [...prev.vehicles];
-              updatedVehicles[index] = { ...updatedVehicles[index], make: '', model: '' };
-              return { ...prev, vehicles: updatedVehicles };
-            });
-            setModels([]);
-          } else {
-            setApiError('No makes found for the selected year.');
-          }
-        } catch (error) {
-          setApiError('Failed to fetch vehicle makes. Please select another year or enter manually.');
+          const res = await fetch('https://vpic.nhtsa.dot.gov/api/vehicles/GetMakesForVehicleType/passenger%20car?format=json');
+          const data = await res.json();
+          setMakes(data.Results.map(m => m.Make_Name));
+        } catch(e) {
+          console.error('Failed to fetch makes');
         }
-        setLoadingMakes(false);
+        setLoading(false);
       };
 
-      var fetchModels = async function (year, make, index) {
-        if (!year || !make) return;
-        setLoadingModels(true);
-        setApiError('');
+      const fetchModels = async (make, year) => {
+        if(!make || !year) return;
+        setLoading(true);
         try {
-          var response = await fetch(`/.netlify/functions/proxy?url=${encodeURIComponent(`https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMakeYear/make/${make}/modelyear/${year}?format=json`)}`);
-          var data = await response.json();
-          if (data.Results && data.Results.length > 0) {
-            setModels(data.Results.map(function (item) { return item.Model_Name; }).sort());
-            setFormData(function (prev) {
-              var updatedVehicles = [...prev.vehicles];
-              updatedVehicles[index] = { ...updatedVehicles[index], model: '' };
-              return { ...prev, vehicles: updatedVehicles };
-            });
-          } else {
-            setApiError('No models found for the selected make and year.');
-          }
-        } catch (error) {
-          setApiError('Failed to fetch vehicle models. Please select another make or enter manually.');
+          const res = await fetch(`https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMakeYear/make/${make}/modelyear/${year}?format=json`);
+          const data = await res.json();
+          setModels(data.Results.map(m => m.Model_Name));
+        } catch(e) {
+          console.error('Failed to fetch models');
         }
-        setLoadingModels(false);
+        setLoading(false);
       };
 
-      var handleChange = function (e, section, field, index) {
-        if (index === undefined) index = null;
-        var name = e.target.name;
-        var value = e.target.value;
-        var type = e.target.type;
-        var checked = e.target.checked;
-        setFormData(function (prev) {
-          if (section === 'vehicles') {
-            var updatedVehicles = [...prev.vehicles];
-            updatedVehicles[index] = { ...updatedVehicles[index], [field]: value };
-            return { ...prev, vehicles: updatedVehicles };
-          } else if (section === 'personalInfo' && field === 'address') {
-            return {
-              ...prev,
-              personalInfo: { ...prev.personalInfo, address: { ...prev.personalInfo.address, [name]: value } }
-            };
-          } else if (section === 'coveragePreferences' && field === 'additionalFeatures') {
-            return {
-              ...prev,
-              coveragePreferences: {
-                ...prev.coveragePreferences,
-                additionalFeatures: { ...prev.coveragePreferences.additionalFeatures, [name]: checked }
-              }
-            };
-          } else {
-            return { ...prev, [section]: { ...prev[section], [field]: value } };
-          }
-        });
+      const decodeVin = async (vin, index) => {
+        if(!vin) return;
+        setLoading(true);
+        try {
+          const res = await fetch(`https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValuesExtended/${vin}?format=json`);
+          const data = await res.json();
+          const info = data.Results[0];
+          updateField('vehicles', index, 'year', info.ModelYear || '');
+          updateField('vehicles', index, 'make', info.Make || '');
+          updateField('vehicles', index, 'model', info.Model || '');
+        } catch(e) {
+          console.error('VIN decode failed');
+        }
+        setLoading(false);
       };
 
-      var addVehicle = function () {
-        setFormData(function (prev) {
-          return {
-            ...prev,
-            vehicles: [...prev.vehicles, { year: '', make: '', model: '', vin: '', annualMileage: '', isFinancedOrLeased: 'no' }]
-          };
-        });
-        setMakes([]);
-        setModels([]);
-      };
-
-      var removeVehicle = function (index) {
-        setFormData(function (prev) {
-          return {
-            ...prev,
-            vehicles: prev.vehicles.filter(function (_, i) { return i !== index; })
-          };
-        });
-      };
-
-      var validateStep = function () {
-        if (step === 1) {
-          var personalInfo = formData.personalInfo;
-          return personalInfo.fullName && personalInfo.dateOfBirth && personalInfo.email && personalInfo.phone && personalInfo.address.street && personalInfo.address.city && personalInfo.address.state && personalInfo.address.zip;
+      const validStep = () => {
+        if(step === 1) {
+          const c = formData.contact;
+          const a = c.address;
+          return c.firstName && c.lastName && /\S+@\S+\.\S+/.test(c.email) && /^\d{10}$/.test(c.phone) && a.street && a.city && a.state && a.zip;
         }
-        if (step === 2) {
-          return formData.vehicles.every(function (vehicle) { return vehicle.year && vehicle.make && vehicle.model && vehicle.annualMileage; });
+        if(step === 2) {
+          return formData.drivers.every(d => d.fullName && d.dob);
         }
-        if (step === 3) {
-          var driverDetails = formData.driverDetails;
-          return driverDetails.yearsLicensed && driverDetails.accidentsOrViolations;
+        if(step === 3) {
+          return formData.vehicles.every(v => v.year && v.make && v.model);
         }
-        if (step === 4) {
-          var currentInsurance = formData.currentInsurance;
-          return currentInsurance.isInsured === 'no' || (currentInsurance.isInsured === 'yes' && currentInsurance.insurerName && currentInsurance.policyExpiration);
+        if(step === 4) {
+          return true;
         }
         return true;
       };
 
-      var nextStep = function () {
-        if (validateStep()) {
-          setStep(function (prev) { return prev + 1; });
-          setMakes([]);
-          setModels([]);
-        } else {
-          alert('Please fill out all required fields.');
+      const next = () => { if(validStep() && step < 5) setStep(s => s+1); };
+      const prev = () => { if(step > 1) setStep(s => s-1); };
+
+      const renderStep = () => {
+        if(step === 1) {
+          const c = formData.contact;
+          const a = c.address;
+          return (
+            <div className="space-y-4">
+              <h2 className="text-xl font-semibold">Contact Information</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input className="border p-2 rounded" placeholder="First Name" value={c.firstName} onChange={e=>updateField('contact',0,'firstName',e.target.value)} required />
+                <input className="border p-2 rounded" placeholder="Last Name" value={c.lastName} onChange={e=>updateField('contact',0,'lastName',e.target.value)} required />
+                <input className="border p-2 rounded md:col-span-2" placeholder="Email" type="email" value={c.email} onChange={e=>updateField('contact',0,'email',e.target.value)} required />
+                <input className="border p-2 rounded md:col-span-2" placeholder="Phone (10 digits)" type="tel" value={c.phone} onChange={e=>updateField('contact',0,'phone',e.target.value.replace(/[^\d]/g,''))} required />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input className="border p-2 rounded md:col-span-2" placeholder="Street" value={a.street} onChange={e=>updateField('contact',0,'street',e.target.value)} required />
+                <input className="border p-2 rounded" placeholder="City" value={a.city} onChange={e=>updateField('contact',0,'city',e.target.value)} required />
+                <input className="border p-2 rounded" placeholder="State" value={a.state} onChange={e=>updateField('contact',0,'state',e.target.value)} required />
+                <input className="border p-2 rounded" placeholder="ZIP" value={a.zip} onChange={e=>updateField('contact',0,'zip',e.target.value)} required />
+              </div>
+            </div>
+          );
         }
+        if(step === 2) {
+          return (
+            <div className="space-y-4">
+              <h2 className="text-xl font-semibold">Driver Details</h2>
+              <div>
+                <label className="mr-2">How many drivers?</label>
+                <select value={formData.drivers.length} onChange={e=>setDriverCount(Number(e.target.value))} className="border p-1 rounded">
+                  {[1,2,3,4,5].map(n=><option key={n} value={n}>{n}</option>)}
+                </select>
+              </div>
+              {formData.drivers.map((d,i)=>(
+                <div key={i} className="border-t pt-4 mt-4 space-y-2">
+                  <h3 className="font-medium">Driver {i+1}</h3>
+                  <input className="border p-2 rounded w-full" placeholder="Full Name" value={d.fullName} onChange={e=>updateField('drivers',i,'fullName',e.target.value)} required />
+                  <input className="border p-2 rounded w-full" type="date" value={d.dob} onChange={e=>updateField('drivers',i,'dob',e.target.value)} required />
+                  <input className="border p-2 rounded w-full" placeholder="License # (optional)" value={d.license} onChange={e=>updateField('drivers',i,'license',e.target.value)} />
+                </div>
+              ))}
+            </div>
+          );
+        }
+        if(step === 3) {
+          return (
+            <div className="space-y-4">
+              <h2 className="text-xl font-semibold">Vehicle Information</h2>
+              <div>
+                <label className="mr-2">How many vehicles?</label>
+                <select value={formData.vehicles.length} onChange={e=>setVehicleCount(Number(e.target.value))} className="border p-1 rounded">
+                  {[1,2,3,4,5].map(n=><option key={n} value={n}>{n}</option>)}
+                </select>
+              </div>
+              {formData.vehicles.map((v,i)=>(
+                <div key={i} className="border-t pt-4 mt-4 space-y-2">
+                  <h3 className="font-medium">Vehicle {i+1}</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                    <select className="border p-2 rounded" value={v.year} onChange={e=>{updateField('vehicles',i,'year',e.target.value); fetchMakes();}} required>
+                      <option value="">Year</option>
+                      {years.map(y=><option key={y} value={y}>{y}</option>)}
+                    </select>
+                    <select className="border p-2 rounded" value={v.make} onChange={e=>{updateField('vehicles',i,'make',e.target.value); fetchModels(e.target.value,v.year);}} required>
+                      <option value="">{loading? 'Loading...' : 'Make'}</option>
+                      {makes.map(m=><option key={m} value={m}>{m}</option>)}
+                    </select>
+                    <select className="border p-2 rounded" value={v.model} onChange={e=>updateField('vehicles',i,'model',e.target.value)} required>
+                      <option value="">{loading? 'Loading...' : 'Model'}</option>
+                      {models.map(mo=><option key={mo} value={mo}>{mo}</option>)}
+                    </select>
+                  </div>
+                  <div className="flex space-x-2">
+                    <input className="border p-2 rounded flex-1" placeholder="VIN (optional)" value={v.vin} onChange={e=>updateField('vehicles',i,'vin',e.target.value)} />
+                    <button type="button" className="px-3 py-2 bg-blue-500 text-white rounded" onClick={()=>decodeVin(v.vin,i)}>Decode</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          );
+        }
+        if(step === 4) {
+          const ins = formData.insurance;
+          return (
+            <div className="space-y-4">
+              <h2 className="text-xl font-semibold">Current Insurance</h2>
+              <input className="border p-2 rounded w-full" placeholder="Current Insurer" value={ins.insurer} onChange={e=>updateField('insurance',0,'insurer',e.target.value)} />
+              <select className="border p-2 rounded w-full" value={ins.timeInsured} onChange={e=>updateField('insurance',0,'timeInsured',e.target.value)} required>
+                <option value="">Time insured with them</option>
+                <option value="<6 months">&lt;6 months</option>
+                <option value="6-12 months">6–12 months</option>
+                <option value="1-3 years">1–3 years</option>
+                <option value="3+ years">3+ years</option>
+              </select>
+              <select className="border p-2 rounded w-full" value={ins.coverageLimits} onChange={e=>updateField('insurance',0,'coverageLimits',e.target.value)} required>
+                <option value="25,000/50,000">25,000/50,000</option>
+                <option value="50,000/100,000">50,000/100,000</option>
+                <option value="100,000/300,000">100,000/300,000</option>
+                <option value=">100,000/300,000">Greater than 100,000/300,000</option>
+              </select>
+              {formData.vehicles.map((v,i)=>(
+                <div key={i} className="border-t pt-4 mt-4">
+                  <h3 className="font-medium">Coverage for Vehicle {i+1}</h3>
+                  <select className="border p-2 rounded w-full" value={ins.vehicleCoverage[i].type} onChange={e=>updateField('insurance',i,'vehicleCoverage',{type: e.target.value})} required>
+                    <option value="Full">Full</option>
+                    <option value="Liability">Liability</option>
+                  </select>
+                  {ins.vehicleCoverage[i].type === 'Full' && (
+                    <select className="border p-2 rounded w-full mt-2" value={ins.vehicleCoverage[i].deductible} onChange={e=>updateField('insurance',i,'vehicleCoverage',{deductible: e.target.value})} required>
+                      <option value="250">250</option>
+                      <option value="500">500</option>
+                      <option value="1000">1000</option>
+                    </select>
+                  )}
+                </div>
+              ))}
+              <input className="border p-2 rounded w-full" placeholder="Current Premium (optional)" value={ins.premium} onChange={e=>updateField('insurance',0,'premium',e.target.value)} />
+            </div>
+          );
+        }
+        return (
+          <div className="text-center py-10">
+            <h2 className="text-xl font-semibold mb-4">Thanks! Your quote will be emailed to you within 30 minutes.</h2>
+          </div>
+        );
       };
 
-      var prevStep = function () {
-        setStep(function (prev) { return prev - 1; });
-        setMakes([]);
-        setModels([]);
-      };
-
-      var handleSubmit = function () {
-        console.log('Form Data Submitted:', JSON.stringify(formData, null, 2));
-        alert('Form submitted! Check console for data.');
-      };
-
-      return React.createElement('div', { className: 'min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8' },
-        React.createElement('div', { className: 'max-w-lg w-full space-y-8 bg-white p-8 rounded-lg shadow-lg' },
-          React.createElement('h2', { className: 'text-center text-3xl font-extrabold text-gray-900' }, 'Insurance Quote Form'),
-          React.createElement('div', { className: 'text-center text-sm text-gray-600' }, 'Step ', step, ' of 5'),
-
-          step === 1 && React.createElement('div', { className: 'space-y-4' },
-            React.createElement('h3', { className: 'text-lg font-medium text-gray-900' }, 'Personal Information'),
-            React.createElement('div', null,
-              React.createElement('label', { htmlFor: 'fullName', className: 'sr-only' }, 'Full Name'),
-              React.createElement('input', { id: 'fullName', name: 'fullName', type: 'text', required: true, className: 'appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm', placeholder: 'Full Name', value: formData.personalInfo.fullName, onChange: function (e) { return handleChange(e, 'personalInfo', 'fullName'); } })
-            ),
-            React.createElement('div', null,
-              React.createElement('label', { htmlFor: 'dateOfBirth', className: 'sr-only' }, 'Date of Birth'),
-              React.createElement('input', { id: 'dateOfBirth', name: 'dateOfBirth', type: 'date', required: true, className: 'appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm', value: formData.personalInfo.dateOfBirth, onChange: function (e) { return handleChange(e, 'personalInfo', 'dateOfBirth'); } })
-            ),
-            React.createElement('div', null,
-              React.createElement('label', { htmlFor: 'email', className: 'sr-only' }, 'Email'),
-              React.createElement('input', { id: 'email', name: 'email', type: 'email', required: true, className: 'appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm', placeholder: 'Email', value: formData.personalInfo.email, onChange: function (e) { return handleChange(e, 'personalInfo', 'email'); } })
-            ),
-            React.createElement('div', null,
-              React.createElement('label', { htmlFor: 'phone', className: 'sr-only' }, 'Phone Number'),
-              React.createElement('input', { id: 'phone', name: 'phone', type: 'tel', required: true, className: 'appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm', placeholder: 'Phone Number', value: formData.personalInfo.phone, onChange: function (e) { return handleChange(e, 'personalInfo', 'phone'); } })
-            ),
-            React.createElement('div', null,
-              React.createElement('label', { htmlFor: 'street', className: 'sr-only' }, 'Street Address'),
-              React.createElement('input', { id: 'street', name: 'street', type: 'text', required: true, className: 'appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm', placeholder: 'Street Address', value: formData.personalInfo.address.street, onChange: function (e) { return handleChange(e, 'personalInfo', 'address'); } })
-            ),
-            React.createElement('div', null,
-              React.createElement('label', { htmlFor: 'city', className: 'sr-only' }, 'City'),
-              React.createElement('input', { id: 'city', name: 'city', type: 'text', required: true, className: 'appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm', placeholder: 'City', value: formData.personalInfo.address.city, onChange: function (e) { return handleChange(e, 'personalInfo', 'address'); } })
-            ),
-            React.createElement('div', null,
-              React.createElement('label', { htmlFor: 'state', className: 'sr-only' }, 'State'),
-              React.createElement('input', { id: 'state', name: 'state', type: 'text', required: true, className: 'appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm', placeholder: 'State', value: formData.personalInfo.address.state, onChange: function (e) { return handleChange(e, 'personalInfo', 'address'); } })
-            ),
-            React.createElement('div', null,
-              React.createElement('label', { htmlFor: 'zip', className: 'sr-only' }, 'ZIP Code'),
-              React.createElement('input', { id: 'zip', name: 'zip', type: 'text', required: true, className: 'appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm', placeholder: 'ZIP Code', value: formData.personalInfo.address.zip, onChange: function (e) { return handleChange(e, 'personalInfo', 'address'); } })
-            )
-          ),
-
-          step === 2 && React.createElement('div', { className: 'space-y-4' },
-            React.createElement('h3', { className: 'text-lg font-medium text-gray-900' }, 'Vehicle Information (Passenger Cars Only)'),
-            apiError && React.createElement('div', { className: 'text-red-600 text-sm' }, apiError),
-            formData.vehicles.map(function (vehicle, index) {
-              return React.createElement('div', { key: index, className: 'space-y-4 border-t pt-4' },
-                React.createElement('h4', { className: 'text-sm font-medium text-gray-700' }, 'Vehicle ', index + 1),
-                React.createElement('div', null,
-                  React.createElement('label', { htmlFor: 'year-' + index, className: 'sr-only' }, 'Year'),
-                  React.createElement('select', { id: 'year-' + index, name: 'year', required: true, className: 'appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm', value: vehicle.year, onChange: function (e) { handleChange(e, 'vehicles', 'year', index); fetchMakes(e.target.value, index); } },
-                    React.createElement('option', { value: '' }, 'Select Year'),
-                    years.map(function (year) { return React.createElement('option', { key: year, value: year }, year); })
-                  )
-                ),
-                React.createElement('div', null,
-                  React.createElement('label', { htmlFor: 'make-' + index, className: 'sr-only' }, 'Make'),
-                  React.createElement('select', { id: 'make-' + index, name: 'make', required: true, disabled: loadingMakes || !vehicle.year, className: 'appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm disabled:bg-gray-100', value: vehicle.make, onChange: function (e) { handleChange(e, 'vehicles', 'make', index); fetchModels(vehicle.year, e.target.value, index); } },
-                    React.createElement('option', { value: '' }, loadingMakes ? 'Loading Makes...' : 'Select Make'),
-                    makes.map(function (make) { return React.createElement('option', { key: make, value: make }, make); })
-                  )
-                ),
-                React.createElement('div', null,
-                  React.createElement('label', { htmlFor: 'model-' + index, className: 'sr-only' }, 'Model'),
-                  React.createElement('select', { id: 'model-' + index, name: 'model', required: true, disabled: loadingModels || !vehicle.make, className: 'appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm disabled:bg-gray-100', value: vehicle.model, onChange: function (e) { return handleChange(e, 'vehicles', 'model', index); } },
-                    React.createElement('option', { value: '' }, loadingModels ? 'Loading Models...' : 'Select Model'),
-                    models.map(function (model) { return React.createElement('option', { key: model, value: model }, model); })
-                  )
-                ),
-                React.createElement('div', null,
-                  React.createElement('label', { htmlFor: 'vin-' + index, className: 'sr-only' }, 'VIN (Optional)'),
-                  React.createElement('input', { id: 'vin-' + index, name: 'vin', type: 'text', className: 'appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm', placeholder: 'VIN (Optional)', value: vehicle.vin, onChange: function (e) { return handleChange(e, 'vehicles', 'vin', index); } })
-                ),
-                React.createElement('div', null,
-                  React.createElement('label', { htmlFor: 'annualMileage-' + index, className: 'sr-only' }, 'Estimated Annual Mileage'),
-                  React.createElement('input', { id: 'annualMileage-' + index, name: 'annualMileage', type: 'number', required: true, className: 'appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm', placeholder: 'Estimated Annual Mileage', value: vehicle.annualMileage, onChange: function (e) { return handleChange(e, 'vehicles', 'annualMileage', index); } })
-                ),
-                React.createElement('div', null,
-                  React.createElement('label', { className: 'block text-sm font-medium text-gray-700' }, 'Is the car financed or leased?'),
-                  React.createElement('select', { name: 'isFinancedOrLeased', className: 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm', value: vehicle.isFinancedOrLeased, onChange: function (e) { return handleChange(e, 'vehicles', 'isFinancedOrLeased', index); } },
-                    React.createElement('option', { value: 'no' }, 'No'),
-                    React.createElement('option', { value: 'yes' }, 'Yes')
-                  )
-                ),
-                formData.vehicles.length > 1 && React.createElement('button', { type: 'button', className: 'text-sm text-red-600 hover:text-red-800', onClick: function () { return removeVehicle(index); } }, 'Remove Vehicle')
-              );
-            }),
-            React.createElement('button', { type: 'button', className: 'text-sm text-indigo-600 hover:text-indigo-800', onClick: addVehicle }, 'Add Another Vehicle')
-          ),
-
-          step === 3 && React.createElement('div', { className: 'space-y-4' },
-            React.createElement('h3', { className: 'text-lg font-medium text-gray-900' }, 'Driver Details'),
-            React.createElement('div', null,
-              React.createElement('label', { htmlFor: 'licenseNumber', className: 'sr-only' }, 'License Number (Optional)'),
-              React.createElement('input', { id: 'licenseNumber', name: 'licenseNumber', type: 'text', className: 'appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm', placeholder: 'License Number (Optional)', value: formData.driverDetails.licenseNumber, onChange: function (e) { return handleChange(e, 'driverDetails', 'licenseNumber'); } })
-            ),
-            React.createElement('div', null,
-              React.createElement('label', { htmlFor: 'stateOfIssue', className: 'sr-only' }, 'State of Issue'),
-              React.createElement('input', { id: 'stateOfIssue', name: 'stateOfIssue', type: 'text', className: 'appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm', placeholder: 'State of Issue', value: formData.driverDetails.stateOfIssue, onChange: function (e) { return handleChange(e, 'driverDetails', 'stateOfIssue'); } })
-            ),
-            React.createElement('div', null,
-              React.createElement('label', { htmlFor: 'yearsLicensed', className: 'sr-only' }, 'Years Licensed'),
-              React.createElement('input', { id: 'yearsLicensed', name: 'yearsLicensed', type: 'number', required: true, className: 'appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm', placeholder: 'Years Licensed', value: formData.driverDetails.yearsLicensed, onChange: function (e) { return handleChange(e, 'driverDetails', 'yearsLicensed'); } })
-            ),
-            React.createElement('div', null,
-              React.createElement('label', { className: 'block text-sm font-medium text-gray-700' }, 'Any accidents or violations in the past 5 years?'),
-              React.createElement('select', { name: 'accidentsOrViolations', className: 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm', value: formData.driverDetails.accidentsOrViolations, onChange: function (e) { return handleChange(e, 'driverDetails', 'accidentsOrViolations'); } },
-                React.createElement('option', { value: 'no' }, 'No'),
-                React.createElement('option', { value: 'yes' }, 'Yes')
-              )
-            )
-          ),
-
-          step === 4 && React.createElement('div', { className: 'space-y-4' },
-            React.createElement('h3', { className: 'text-lg font-medium text-gray-900' }, 'Current Insurance Info'),
-            React.createElement('div', null,
-              React.createElement('label', { className: 'block text-sm font-medium text-gray-700' }, 'Are you currently insured?'),
-              React.createElement('select', { name: 'isInsured', className: 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm', value: formData.currentInsurance.isInsured, onChange: function (e) { return handleChange(e, 'currentInsurance', 'isInsured'); } },
-                React.createElement('option', { value: 'no' }, 'No'),
-                React.createElement('option', { value: 'yes' }, 'Yes')
-              )
-            ),
-            formData.currentInsurance.isInsured === 'yes' && React.createElement(React.Fragment, null,
-              React.createElement('div', null,
-                React.createElement('label', { htmlFor: 'insurerName', className: 'sr-only' }, 'Current Insurer Name'),
-                React.createElement('input', { id: 'insurerName', name: 'insurerName', type: 'text', required: true, className: 'appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm', placeholder: 'Current Insurer Name', value: formData.currentInsurance.insurerName, onChange: function (e) { return handleChange(e, 'currentInsurance', 'insurerName'); } })
-              ),
-              React.createElement('div', null,
-                React.createElement('label', { htmlFor: 'policyExpiration', className: 'sr-only' }, 'Policy Expiration Date'),
-                React.createElement('input', { id: 'policyExpiration', name: 'policyExpiration', type: 'date', required: true, className: 'appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm', value: formData.currentInsurance.policyExpiration, onChange: function (e) { return handleChange(e, 'currentInsurance', 'policyExpiration'); } })
-              )
-            )
-          ),
-
-          step === 5 && React.createElement('div', { className: 'space-y-4' },
-            React.createElement('h3', { className: 'text-lg font-medium text-gray-900' }, 'Coverage Preferences'),
-            React.createElement('div', null,
-              React.createElement('label', { className: 'block text-sm font-medium text-gray-700' }, 'Type of Coverage'),
-              React.createElement('select', { name: 'coverageType', className: 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm', value: formData.coveragePreferences.coverageType, onChange: function (e) { return handleChange(e, 'coveragePreferences', 'coverageType'); } },
-                React.createElement('option', { value: 'liability' }, 'Liability Only'),
-                React.createElement('option', { value: 'full' }, 'Full Coverage')
-              )
-            ),
-            React.createElement('div', null,
-              React.createElement('label', { className: 'block text-sm font-medium text-gray-700' }, 'Deductible Preference'),
-              React.createElement('select', { name: 'deductible', className: 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm', value: formData.coveragePreferences.deductible, onChange: function (e) { return handleChange(e, 'coveragePreferences', 'deductible'); } },
-                React.createElement('option', { value: '500' }, '$500'),
-                React.createElement('option', { value: '1000' }, '$1,000'),
-                React.createElement('option', { value: '1500' }, '$1,500'),
-                React.createElement('option', { value: '2000' }, '$2,000')
-              )
-            ),
-            React.createElement('div', null,
-              React.createElement('label', { className: 'block text-sm font-medium text-gray-700' }, 'Additional Features'),
-              React.createElement('div', { className: 'mt-2 space-y-2' },
-                React.createElement('div', null,
-                  React.createElement('label', { className: 'inline-flex items-center' },
-                    React.createElement('input', { type: 'checkbox', name: 'roadside', checked: formData.coveragePreferences.additionalFeatures.roadside, onChange: function (e) { return handleChange(e, 'coveragePreferences', 'additionalFeatures'); }, className: 'rounded border-gray-300 text-indigo-600 focus:ring-indigo-500' }),
-                    React.createElement('span', { className: 'ml-2 text-sm text-gray-600' }, 'Roadside Assistance')
-                  )
-                ),
-                React.createElement('div', null,
-                  React.createElement('label', { className: 'inline-flex items-center' },
-                    React.createElement('input', { type: 'checkbox', name: 'rental', checked: formData.coveragePreferences.additionalFeatures.rental, onChange: function (e) { return handleChange(e, 'coveragePreferences', 'additionalFeatures'); }, className: 'rounded border-gray-300 text-indigo-600 focus:ring-indigo-500' }),
-                    React.createElement('span', { className: 'ml-2 text-sm text-gray-600' }, 'Rental Car Coverage')
-                  )
-                )
-              )
-            )
-          ),
-
-          React.createElement('div', { className: 'flex justify-between mt-6' },
-            step > 1 && React.createElement('button', { type: 'button', className: 'py-2 px-4 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500', onClick: prevStep }, 'Back'),
-            step < 5 && React.createElement('button', { type: 'button', className: 'ml-auto py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500', onClick: nextStep }, 'Next'),
-            step === 5 && React.createElement('button', { type: 'button', className: 'ml-auto py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500', onClick: handleSubmit }, 'Submit')
-          )
-        )
+      return (
+        <form className="bg-white p-6 rounded shadow-md space-y-6">
+          <div className="text-sm text-gray-600 text-right">Step {step} of 5</div>
+          {renderStep()}
+          <div className="flex justify-between pt-4">
+            {step > 1 && <button type="button" onClick={prev} className="px-4 py-2 rounded bg-gray-200">Back</button>}
+            {step < 5 && <button type="button" onClick={next} disabled={!validStep()} className="px-4 py-2 rounded bg-blue-500 text-white disabled:opacity-50">Next</button>}
+          </div>
+        </form>
       );
     }
 
-    ReactDOM.render(
-      React.createElement(ErrorBoundary, null, React.createElement(InsuranceForm, null)),
-      document.getElementById('root')
-    );
+    ReactDOM.createRoot(document.getElementById('root')).render(<InsuranceForm />);
   </script>
 </body>
 </html>
