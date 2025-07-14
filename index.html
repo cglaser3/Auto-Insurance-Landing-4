@@ -382,10 +382,13 @@
       );
     }
 
-    ReactDOM.render(
-      React.createElement(ErrorBoundary, null, React.createElement(InsuranceForm, null)),
-      document.getElementById('root')
-    );
+  ReactDOM.render(
+    React.createElement(ErrorBoundary, null, React.createElement(InsuranceForm, null)),
+    document.getElementById('root')
+  );
   </script>
+  <footer class="text-center text-gray-500 text-sm mt-4">
+    <p>© 2024 Example Insurance Company. All rights reserved.</p>
+  </footer>
 </body>
 </html>
